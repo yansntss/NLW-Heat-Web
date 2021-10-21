@@ -1,7 +1,19 @@
+import { api } from "../../services/api";
+import { useEffect, useState } from "react";
+
 import styles from "./styles.module.scss";
 import logoImg from "../../assets/logo.svg";
 
+//executa a função passada no primeiro parametro, sempre que o valor da variavel do segundo parametro mudar
+//primeiro param: função --- segundo param: array com as variaveis
+//quando eu quero que ela execute apenas uma vez, eu deixo o array vazio
+
 export function MessageList() {
+  useEffect(() => {
+    api.get("messages/last3").then((response) => {
+      console.log(response.data);
+    });
+  }, []);
   return (
     <div className={styles.messageListWrapper}>
       <img src={logoImg} alt="DoWhile 2021" />
