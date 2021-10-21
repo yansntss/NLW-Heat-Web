@@ -4,14 +4,27 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import logoImg from "../../assets/logo.svg";
 
-//executa a função passada no primeiro parametro, sempre que o valor da variavel do segundo parametro mudar
+//sobre state, executa a função passada no primeiro parametro, sempre que o valor da variavel do segundo parametro mudar
 //primeiro param: função --- segundo param: array com as variaveis
 //quando eu quero que ela execute apenas uma vez, eu deixo o array vazio
 
+type Message = {
+  id: string;
+  text: string;
+  user: {
+    name: string;
+    avatar_url: string;
+  };
+};
+
 export function MessageList() {
+                                  //useState é uma lista de mensagem
+  const [messages, setMessages] = useState<Message[]>([]);
+
   useEffect(() => {
-    api.get("messages/last3").then((response) => {
-      console.log(response.data);
+    //api é uma lista de mensagem
+    api.get<Message[]>("messages/last3").then((response) => {
+      setMessages(response.data)
     });
   }, []);
   return (
