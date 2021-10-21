@@ -11,6 +11,7 @@ type User = {
 type AuthContextData = {
   user: User | null;
   signInUrl: string;
+  signOut: () => void
 };
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -23,53 +24,68 @@ type AuthProvider = {
 type AuthResponse = {
   token: string;
   user: {
-    id:string;
+    id: string;
     avatar_url: string;
     name: string;
     login: string;
-  }
-}
+  };
+};
 
 export function AuthProvider(props: AuthProvider) {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<User | null>(null);
 
-  const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=c2ef8d87b60b2f4fd720`
+  const signInUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=c2ef8d87b60b2f4fd720`;
 
-  async function signIn(githubCode: string){
-    const response  = await api.post<AuthResponse>('authenticate', {
+  async function signIn(githubCode: string) {
+    const response = await api.post<AuthResponse>("authenticate", {
       code: githubCode,
-    })
+    });
 
-    const {token, user } = response.data;
+    const { token, user } = response.data;
 
     //salvando o token no storage do navegador
-    localStorage.setItem('@dowhile:token', token)
+    localStorage.setItem("@dowhile:token", token);
 
-    setUser(user)
+    setUser(user);
   }
 
-  
+  function signOut(){
+    setUser(null)
+    localStorage.removeItem("@dowhile:token")
+  }
 
-  useEffect(()=>{
+  useEffect(() => {
+    const token = localStorage.getItem("@dowhile:token");
+
+    if (token) {
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
+
+      api.get<User>("profile").then((response) => {
+        setUser(response.data);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     //pegando url da aplicação
-    const url = window.location.href
+    const url = window.location.href;
     //verificando se no texto da url tem o code
-    const hasGithubCode = url.includes('?code=')
+    const hasGithubCode = url.includes("?code=");
 
-    if(hasGithubCode) {
+    if (hasGithubCode) {
       //o que vim antes do ' ?code= ' é minha url sem o code e o que vim depois, vai ser meu code
-      const [urlWithoutCode, githubCode] = url.split('?code=')
+      const [urlWithoutCode, githubCode] = url.split("?code=");
 
-      //tirando o code da url para nao ficar exposto 
-      window.history.pushState({}, '', urlWithoutCode)
-      
+      //tirando o code da url para nao ficar exposto
+      window.history.pushState({}, "", urlWithoutCode);
+
       signIn(githubCode);
     }
-  },[])
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ signInUrl, user }}>
+    <AuthContext.Provider value={{ signInUrl, user, signOut }}>
       {props.children}
-      </AuthContext.Provider>
+    </AuthContext.Provider>
   );
 }
