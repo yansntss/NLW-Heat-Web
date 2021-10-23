@@ -40,13 +40,12 @@ yarn dev
 - Ts
 - socket.io client
 - vite
-
-
 ---
 [Como instalar as ferramentas e bonus](https://efficient-sloth-d85.notion.site/Instala-o-das-ferramentas-b7c9f41e332a490d86fca81a5b830359).
 
 ---
-
+## 🚧  Em desenvolvimento 
+---
 ## 📫 Contribuindo para NLW Heat Web
 <!---Se o seu README for longo ou se você tiver algum processo ou etapas específicas que deseja que os contribuidores sigam, considere a criação de um arquivo CONTRIBUTING.md separado--->
 Para contribuir com NLW Heat Web, siga estas etapas:
