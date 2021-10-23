@@ -20,14 +20,14 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 Para instalar o <strong>NLW Heat Web</strong>, siga estas etapas:
 
-Clone o repositório do nlw heat node e rode:
+Clone o repositório do nlw heat node e para instalar as dependencias, rode:
 ```
 yarn
 ```
 
-Windows:
+Rode o mesmo em nlw heat web:
 ```
-<comando_de_instalação>
+yarn
 ```
 
 ## ☕ Usando NLW Heat Web
