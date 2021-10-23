@@ -18,25 +18,29 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 ## 🚀 Instalando NLW Heat Web
 
-Para instalar o <strong>NLW Heat Web</strong>, siga estas etapas:
+Para instalar o <strong>NLW Heat Web</strong>:
 
-Clone o repositório do nlw heat node e para instalar as dependencias, rode:
-```
-yarn
-```
-
-Rode o mesmo em nlw heat web:
+Clone o repositório e para instalar as dependencias, rode:
 ```
 yarn
 ```
 
 ## ☕ Usando NLW Heat Web
 
-Para usar o NLW Heat Web, rode esse comando no nlw-heat-node e no nlw-heat-web:
+Para usar o NLW Heat Web, rode esse comando para executar o server:
 
 ```
 yarn dev
 ```
+---
+
+## 🚀  Tecnologias utilizada
+- React
+- scss
+- Ts
+- socket.io client
+- vite
+
 
 ---
 [Como instalar as ferramentas e bonus](https://efficient-sloth-d85.notion.site/Instala-o-das-ferramentas-b7c9f41e332a490d86fca81a5b830359).
