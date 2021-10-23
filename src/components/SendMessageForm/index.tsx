@@ -1,10 +1,13 @@
 import { useContext, useState, FormEvent } from "react";
 import { VscGithubInverted, VscSignOut } from "react-icons/vsc";
-import styles from "./styles.module.scss";
 import { AuthContext } from "../../context/auth";
 import { api } from "../../services/api";
 
+import styles from "./styles.module.scss";
+
+
 export function SendMessageForm() {
+  
   const { user, signOut } = useContext(AuthContext);
   const [message, setMessage] = useState("");
 
@@ -19,7 +22,7 @@ export function SendMessageForm() {
 
     setMessage('')
   }
-
+ 
   return (
     <div className={styles.sendMessageFormWrapper}>
       <button onClick={signOut} className={styles.signOutButton}>
@@ -31,7 +34,7 @@ export function SendMessageForm() {
           <img src={user?.avatar_url} alt={user?.name} />
         </div>
         <strong className={styles.userName}>{user?.name}</strong>
-        <span className={styles.userGithub}>
+        <span  className={styles.userGithub}>
           <VscGithubInverted size="16px" />
           {user?.login}
         </span>
